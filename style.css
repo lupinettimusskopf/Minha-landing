@@ -1,11 +1,11 @@
-/* ===== RESET ===== */
+/* ===== RESET ===== 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ===== VARIÁVEIS / TOKENS ===== */
+/* ===== VARIÁVEIS / TOKENS =====
 :root {
     --bg: #0f1115;
     --bg-secundario: #161922;
@@ -45,7 +45,7 @@ a {
     text-decoration: none;
 }
 
-/* ===== NAVBAR ===== */
+/* ===== NAVBAR ===== *
 .topo {
     background-color: rgba(15, 17, 21, 0.85);
     backdrop-filter: blur(8px);
@@ -89,7 +89,7 @@ a {
     color: var(--texto-principal);
 }
 
-/* ===== HERO ===== */
+/* ===== HERO ===== *
 .hero {
     padding: 100px 0;
 }
@@ -168,7 +168,7 @@ a {
     transform: translateY(-2px);
 }
 
-/* HERO CARD */
+/* HERO CARD *
 .hero-card {
     background-color: var(--bg-card);
     border: 1px solid var(--borda);
@@ -219,7 +219,7 @@ a {
     font-weight: 500;
 }
 
-/* ===== SOBRE ===== */
+/* ===== SOBRE ===== *
 .sobre {
     background-color: var(--bg-secundario);
     padding: 90px 0;
@@ -253,7 +253,7 @@ a {
     font-size: 16px;
 }
 
-/* ===== SERVIÇOS ===== */
+/* ===== SERVIÇOS ===== *
 .servicos {
     padding: 90px 0;
 }
@@ -311,7 +311,7 @@ a {
     font-size: 15px;
 }
 
-/* ===== PROJETOS ===== */
+/* ===== PROJETOS ===== *
 .projetos {
     background-color: var(--bg-secundario);
     padding: 90px 0;
@@ -355,7 +355,7 @@ a {
     margin: 0 20px 20px;
 }
 
-/* ===== CONTATO ===== */
+/* ===== CONTATO ===== *
 .contato {
     padding: 90px 0;
 }
@@ -408,7 +408,7 @@ a {
     transform: translateY(-2px);
 }
 
-/* ===== RODAPÉ ===== */
+/* ===== RODAPÉ ===== 
 .rodape {
     border-top: 1px solid var(--borda);
     padding: 28px 0;
@@ -420,7 +420,7 @@ a {
     color: var(--texto-secundario);
 }
 
-/* ===== RESPONSIVO ===== */
+/* ===== RESPONSIVO ===== *
 @media (max-width: 860px) {
     .sobre-conteudo {
         grid-template-columns: 1fr;

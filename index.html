@@ -3,192 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enzo Musskopf Lupinetti | Desenvolvedor de Software</title>
-    <meta name="description" content="Portfólio de Enzo Musskopf Lupinetti, estudante de Engenharia de Software. Projetos em React, C# e desenvolvimento web.">
-    <link rel="stylesheet" href="style.css">
+    <title>Convite</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0, #ffafbd);
+            background-size: 200% 200%;
+            animation: gradiente 8s ease infinite;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradiente {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card {
+            background: white;
+            padding: 50px 60px;
+            border-radius: 28px;
+            box-shadow: 0 25px 70px rgba(255, 105, 135, 0.35);
+            text-align: center;
+            position: relative;
+            animation: aparecer 0.6s ease-out;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .imagem-topo {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ff8fa3;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 24px rgba(255, 105, 135, 0.4);
+        }
+
+        h1 {
+            color: #444;
+            font-size: 28px;
+            margin-bottom: 36px;
+            font-weight: 700;
+        }
+
+        .botoes {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            position: relative;
+            height: 50px;
+        }
+
+        button {
+            padding: 14px 36px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        #sim {
+            background: linear-gradient(135deg, #4caf50, #66bb6a);
+            color: white;
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        #sim:hover {
+            transform: scale(1.08);
+            box-shadow: 0 10px 26px rgba(76, 175, 80, 0.5);
+        }
+
+        #nao {
+            background: linear-gradient(135deg, #f44336, #ef5350);
+            color: white;
+            position: fixed;
+            box-shadow: 0 8px 20px rgba(244, 67, 54, 0.4);
+        }
+
+        .mensagem {
+            margin-top: 24px;
+            font-size: 22px;
+            font-weight: 700;
+            color: #e91e63;
+            display: none;
+            animation: aparecer 0.4s ease-out;
+        }
+    </style>
 </head>
 <body>
-    <header class="topo">
-        <div class="container topo-conteudo">
-            <a class="logo" href="/">EML<span>.dev</span></a>
-            <nav class="menu-links" aria-label="Menu principal">
-                <a href="#sobre">Sobre</a>
-                <a href="#servicos">Serviços</a>
-                <a href="#projetos">Projetos</a>
-                <a href="#contato">Contato</a>
-            </nav>
+    <div class="card">
+        <img class="imagem-topo" src="gato mimado.webp" alt="Foto">
+        <h1>Vamo sair??</h1>
+        <div class="botoes">
+            <button id="sim">Sim!</button>
+            <button id="nao">Não</button>
         </div>
-    </header>
+        <p class="mensagem" id="mensagem">Sabia que você ia dizer sim! 🥰</p>
+    </div>
 
-    <main>
-        <!-- HERO -->
-        <section class="hero">
-            <div class="container hero-conteudo">
-                <div class="hero-texto">
-                    <p class="hero-tag">Desenvolvimento Web &amp; Software</p>
+    <script>
+        const botaoNao = document.getElementById('nao');
+        const botaoSim = document.getElementById('sim');
+        const mensagem = document.getElementById('mensagem');
 
-                    <h1>Enzo Musskopf Lupinetti</h1>
+        function moverBotaoNao() {
+            const margem = botaoNao.offsetWidth + 20;
+            const margemAltura = botaoNao.offsetHeight + 20;
+            const maxX = window.innerWidth - margem;
+            const maxY = window.innerHeight - margemAltura;
 
-                    <p class="hero-descricao">
-                        Estudante de Engenharia de Software construindo interfaces web
-                        e aplicações com React, C# e Python. Foco em código limpo e
-                        soluções que funcionam de verdade.
-                    </p>
+            const novoX = Math.max(10, Math.random() * maxX);
+            const novoY = Math.max(10, Math.random() * maxY);
 
-                    <div class="hero-botoes">
-                        <a class="hero-botao hero-botao-principal" href="#projetos">Ver projetos</a>
-                        <a class="hero-botao hero-botao-secundario" href="#contato">Fale comigo</a>
-                    </div>
-                </div>
+            botaoNao.style.left = novoX + 'px';
+            botaoNao.style.top = novoY + 'px';
+        }
 
-                <div class="hero-card">
-                    <img class="hero-foto" src="mango.jpg" alt="Foto de Enzo Musskopf Lupinetti">
-                    <h2>Enzo Musskopf Lupinetti</h2>
-                    <p>Desenvolvedor de Software</p>
+        // desktop: foge ao passar o mouse por cima
+        botaoNao.addEventListener('mouseenter', moverBotaoNao);
 
-                    <div class="hero-tecnologias">
-                        <span>React</span>
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>C#</span>
-                        <span>Python</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+        // mobile: foge ao tentar tocar, antes do clique completar
+        botaoNao.addEventListener('touchstart', function (e) {
+            e.preventDefault();
+            moverBotaoNao();
+        }, { passive: false });
 
-        <!-- SOBRE -->
-        <section id="sobre" class="sobre">
-            <div class="container sobre-conteudo">
-                <div>
-                    <p class="sobre-tag">Sobre mim</p>
-                    <h2>Aprendendo na prática, construindo de verdade</h2>
-                </div>
-                <div>
-                    <p>
-                        Sou estudante de Engenharia de Software, com interesse particular
-                        em desenvolvimento front-end e em lógica de jogos. Tenho experiência
-                        prática construindo interfaces web responsivas e mexendo com
-                        frameworks de desenvolvimento de jogos, sempre buscando entender
-                        a fundo como cada peça do código se conecta antes de sair escrevendo.
-                    </p>
-                    <p>
-                        Acredito que bom desenvolvimento não é só fazer funcionar — é fazer
-                        funcionar de um jeito que outra pessoa consiga entender e dar
-                        manutenção depois.
-                    </p>
-                </div>
-            </div>
-        </section>
+        // mobile: rede de segurança - se por algum motivo o toque "acertar"
+        // mesmo assim (ex: toque muito rápido), também foge no click
+        botaoNao.addEventListener('click', function (e) {
+            e.preventDefault();
+            moverBotaoNao();
+        });
 
-        <!-- SERVIÇOS -->
-        <section id="servicos" class="servicos">
-            <div class="container">
-                <div class="servicos-titulo">
-                    <p class="servicos-tag">Serviços</p>
-                    <h2>No que eu posso ajudar</h2>
-                    <p>
-                        Soluções práticas em desenvolvimento web e software,
-                        do protótipo inicial até a entrega funcional.
-                    </p>
-                </div>
+        // recalcula limites se a tela girar ou for redimensionada
+        window.addEventListener('resize', function () {
+            if (botaoNao.style.position === 'fixed' && botaoNao.style.left) {
+                moverBotaoNao();
+            }
+        });
 
-                <div class="servicos-cards">
-                    <article class="servicos-card">
-                        <h3>Landing Pages</h3>
-                        <p>
-                            Páginas institucionais e de divulgação, responsivas e
-                            otimizadas, em HTML, CSS e JavaScript.
-                        </p>
-                    </article>
-
-                    <article class="servicos-card">
-                        <h3>Interfaces em React</h3>
-                        <p>
-                            Componentes e aplicações front-end interativas,
-                            com foco em performance e boa experiência de uso.
-                        </p>
-                    </article>
-
-                    <article class="servicos-card">
-                        <h3>Scripts &amp; Automação</h3>
-                        <p>
-                            Pequenos sistemas e automações em Python e C# para
-                            resolver problemas específicos do dia a dia.
-                        </p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- PROJETOS -->
-        <section id="projetos" class="projetos">
-            <div class="container">
-                <div class="projetos-titulo">
-                    <p class="projetos-tag">Projetos</p>
-                    <h2>Alguns trabalhos recentes</h2>
-                    <p>
-                        Uma seleção de projetos pessoais e acadêmicos desenvolvidos
-                        até aqui.
-                    </p>
-                </div>
-
-                <div class="projetos-cards">
-                    <article class="projetos-card">
-                        <img src="3 l eids.webp" alt="Prévia do projeto 1">
-                        <h3>Leidzitas 3</h3>
-                        <p>
-                            3 leids
-                        </p>
-                    </article>
-
-                    <article class="projetos-card">
-                        <img src="gato.webp" alt="Prévia do projeto 2">
-                        <h3>LeidJANE 2</h3>
-                        <p>
-                            agora a LeidJANE
-                        </p>
-                    </article>
-
-                    <article class="projetos-card">
-                        <img src="gato dormindo.webp" alt="Prévia do projeto 3">
-                        <h3>E a Leidneneca</h3>
-                        <p>
-                            leid dormindo 
-                        </p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- CONTATO -->
-        <section id="contato" class="contato">
-            <div class="container contato-conteudo">
-                <div class="contato-texto">
-                    <p class="contato-tag">Contato</p>
-                    <h2>Vamos conversar?</h2>
-                    <p>
-                        Aberto a oportunidades de estágio, freelas e projetos
-                        em parceria. Entre em contato pelos canais abaixo.
-                    </p>
-                </div>
-
-                <div class="contato-card">
-                    <p>Email: seuemail@exemplo.com</p>
-                    <p>Telefone: (67) 00000-0000</p>
-                    <a class="contato-botao" href="https://wa.me/5567000000000" target="_blank" rel="noopener">Enviar mensagem</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="rodape">
-        <div class="container">
-            <p>&copy; 2026 Enzo Musskopf Lupinetti. Todos os direitos reservados.</p>
-        </div>
-    </footer>
+        botaoSim.addEventListener('click', function () {
+            mensagem.style.display = 'block';
+            document.querySelector('h1').textContent = 'Combinado! 🎉';
+            document.querySelector('.botoes').style.display = 'none';
+        });
+    </script>
 </body>
 </html>
