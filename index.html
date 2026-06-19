@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convite</title>
+    <title>Quiz: Você conhece o Enzito?</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,164 +16,402 @@
 
         body {
             font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #ffafbd, #ffc3a0, #ffafbd);
-            background-size: 200% 200%;
-            animation: gradiente 8s ease infinite;
-            height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
+            padding: 20px;
         }
 
-        @keyframes gradiente {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .card {
+        .quiz-container {
             background: white;
-            padding: 50px 60px;
-            border-radius: 28px;
-            box-shadow: 0 25px 70px rgba(255, 105, 135, 0.35);
-            text-align: center;
-            position: relative;
-            animation: aparecer 0.6s ease-out;
+            border-radius: 24px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+            padding: 40px;
+            max-width: 480px;
+            width: 100%;
+            animation: aparecer 0.5s ease-out;
         }
 
         @keyframes aparecer {
             from {
                 opacity: 0;
-                transform: translateY(20px) scale(0.95);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                transform: translateY(0);
             }
         }
 
-        .imagem-topo {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #ff8fa3;
-            margin-bottom: 24px;
-            box-shadow: 0 8px 24px rgba(255, 105, 135, 0.4);
+        .topo-quiz {
+            text-align: center;
+            margin-bottom: 28px;
         }
 
-        h1 {
-            color: #444;
-            font-size: 28px;
-            margin-bottom: 36px;
-            font-weight: 700;
+        .topo-quiz h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 8px;
         }
 
-        .botoes {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            position: relative;
-            height: 50px;
+        .progresso-texto {
+            font-size: 14px;
+            color: #888;
+            font-weight: 500;
         }
 
-        button {
-            padding: 14px 36px;
-            font-size: 16px;
+        .barra-progresso {
+            width: 100%;
+            height: 8px;
+            background-color: #eee;
+            border-radius: 10px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+
+        .barra-progresso-interna {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 0.4s ease;
+        }
+
+        .pergunta-texto {
+            font-size: 19px;
             font-weight: 600;
+            color: #333;
+            margin-bottom: 24px;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .alternativas {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .alternativa-botao {
+            background-color: #f5f5f8;
+            border: 2px solid #f5f5f8;
+            border-radius: 14px;
+            padding: 16px 20px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #444;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .alternativa-botao:hover:not(:disabled) {
+            border-color: #764ba2;
+            background-color: #f0ecfa;
+            transform: translateX(4px);
+        }
+
+        .alternativa-botao .letra {
+            display: inline-block;
+            width: 26px;
+            height: 26px;
+            line-height: 26px;
+            text-align: center;
+            background-color: #e0e0ea;
+            border-radius: 50%;
+            margin-right: 12px;
+            font-weight: 700;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .alternativa-botao.correta {
+            background-color: #e6f7ed;
+            border-color: #4caf50;
+            color: #2e7d32;
+        }
+
+        .alternativa-botao.correta .letra {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .alternativa-botao.errada {
+            background-color: #fdeaea;
+            border-color: #f44336;
+            color: #c62828;
+        }
+
+        .alternativa-botao.errada .letra {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .alternativa-botao:disabled {
+            cursor: default;
+        }
+
+        .botao-proxima {
+            display: none;
+            width: 100%;
+            margin-top: 22px;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
             border: none;
-            border-radius: 30px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 600;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        #sim {
-            background: linear-gradient(135deg, #4caf50, #66bb6a);
-            color: white;
-            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+        .botao-proxima:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(118, 75, 162, 0.35);
         }
 
-        #sim:hover {
-            transform: scale(1.08);
-            box-shadow: 0 10px 26px rgba(76, 175, 80, 0.5);
-        }
-
-        #nao {
-            background: linear-gradient(135deg, #f44336, #ef5350);
-            color: white;
-            position: fixed;
-            box-shadow: 0 8px 20px rgba(244, 67, 54, 0.4);
-        }
-
-        .mensagem {
-            margin-top: 24px;
-            font-size: 22px;
-            font-weight: 700;
-            color: #e91e63;
+        /* TELA DE RESULTADO */
+        .tela-resultado {
             display: none;
-            animation: aparecer 0.4s ease-out;
+            text-align: center;
+        }
+
+        .tela-resultado .emoji-resultado {
+            font-size: 56px;
+            margin-bottom: 16px;
+        }
+
+        .tela-resultado h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .tela-resultado .subtexto {
+            color: #888;
+            font-size: 15px;
+            margin-bottom: 28px;
+        }
+
+        .placar {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .placar-item {
+            flex: 1;
+            padding: 20px;
+            border-radius: 16px;
+        }
+
+        .placar-item.acertos {
+            background-color: #e6f7ed;
+        }
+
+        .placar-item.erros {
+            background-color: #fdeaea;
+        }
+
+        .placar-item .numero {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .placar-item.acertos .numero {
+            color: #4caf50;
+        }
+
+        .placar-item.erros .numero {
+            color: #f44336;
+        }
+
+        .placar-item .label {
+            font-size: 13px;
+            color: #888;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .botao-reiniciar {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .botao-reiniciar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(118, 75, 162, 0.35);
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <img class="imagem-topo" src="gato mimado.webp" alt="Foto">
-        <h1>Vamo sair??</h1>
-        <div class="botoes">
-            <button id="sim">Sim!</button>
-            <button id="nao">Não</button>
+    <div class="quiz-container">
+
+        <!-- TELA DE PERGUNTAS -->
+        <div id="tela-quiz">
+            <div class="topo-quiz">
+                <h1>Vamos ver se vc ta Sabendo Leid</h1>
+                <p class="progresso-texto" id="progresso-texto">Pergunta 1 de 3</p>
+                <div class="barra-progresso">
+                    <div class="barra-progresso-interna" id="barra-progresso-interna"></div>
+                </div>
+            </div>
+
+            <p class="pergunta-texto" id="pergunta-texto"></p>
+
+            <div class="alternativas" id="alternativas"></div>
+
+            <button class="botao-proxima" id="botao-proxima">Próxima pergunta →</button>
         </div>
-        <p class="mensagem" id="mensagem">Sabia que você ia dizer sim! 🥰</p>
+
+        <!-- TELA DE RESULTADO -->
+        <div class="tela-resultado" id="tela-resultado">
+            <div class="emoji-resultado" id="emoji-resultado"></div>
+            <h2 id="titulo-resultado">Resultado final</h2>
+            <p class="subtexto" id="subtexto-resultado"></p>
+
+            <div class="placar">
+                <div class="placar-item acertos">
+                    <div class="numero" id="numero-acertos">0</div>
+                    <div class="label">Acertos</div>
+                </div>
+                <div class="placar-item erros">
+                    <div class="numero" id="numero-erros">0</div>
+                    <div class="label">Erros</div>
+                </div>
+            </div>
+
+            <button class="botao-reiniciar" id="botao-reiniciar">Jogar de novo</button>
+        </div>
+
     </div>
 
     <script>
-        const botaoNao = document.getElementById('nao');
-        const botaoSim = document.getElementById('sim');
-        const mensagem = document.getElementById('mensagem');
+        const perguntas = [
+            {
+                pergunta: "Quantos anos eu tenho em ?",
+                alternativas: ["17", "18", "20", "21"],
+                correta: 1
+            },
+            {
+                pergunta: "E meu aniversário em?",
+                alternativas: ["15 de maio", "28 de maio", "9 de maio", "2 de maio"],
+                correta: 1
+            },
+            {
+                pergunta: "QUE curso eu faço leid?",
+                alternativas: ["Ciência da Computação", "Engenharia de Software", "Sistemas de Informação", "Análise e Desenvolvimento de Sistemas"],
+                correta: 1
+            }
+        ];
 
-        function moverBotaoNao() {
-            const margem = botaoNao.offsetWidth + 20;
-            const margemAltura = botaoNao.offsetHeight + 20;
-            const maxX = window.innerWidth - margem;
-            const maxY = window.innerHeight - margemAltura;
+        let perguntaAtual = 0;
+        let acertos = 0;
+        let erros = 0;
 
-            const novoX = Math.max(10, Math.random() * maxX);
-            const novoY = Math.max(10, Math.random() * maxY);
+        const letras = ['a', 'b', 'c', 'd'];
 
-            botaoNao.style.left = novoX + 'px';
-            botaoNao.style.top = novoY + 'px';
+        const telaQuiz = document.getElementById('tela-quiz');
+        const telaResultado = document.getElementById('tela-resultado');
+        const perguntaTexto = document.getElementById('pergunta-texto');
+        const alternativasDiv = document.getElementById('alternativas');
+        const botaoProxima = document.getElementById('botao-proxima');
+        const progressoTexto = document.getElementById('progresso-texto');
+        const barraProgressoInterna = document.getElementById('barra-progresso-interna');
+
+        function carregarPergunta() {
+            const dados = perguntas[perguntaAtual];
+            perguntaTexto.textContent = dados.pergunta;
+            alternativasDiv.innerHTML = '';
+            botaoProxima.style.display = 'none';
+
+            progressoTexto.textContent = `Pergunta ${perguntaAtual + 1} de ${perguntas.length}`;
+            barraProgressoInterna.style.width = `${((perguntaAtual) / perguntas.length) * 100}%`;
+
+            dados.alternativas.forEach((texto, index) => {
+                const botao = document.createElement('button');
+                botao.className = 'alternativa-botao';
+                botao.innerHTML = `<span class="letra">${letras[index]}</span>${texto}`;
+                botao.addEventListener('click', () => responder(index));
+                alternativasDiv.appendChild(botao);
+            });
         }
 
-        // desktop: foge ao passar o mouse por cima
-        botaoNao.addEventListener('mouseenter', moverBotaoNao);
+        function responder(indiceEscolhido) {
+            const dados = perguntas[perguntaAtual];
+            const botoes = alternativasDiv.querySelectorAll('.alternativa-botao');
 
-        // mobile: foge ao tentar tocar, antes do clique completar
-        botaoNao.addEventListener('touchstart', function (e) {
-            e.preventDefault();
-            moverBotaoNao();
-        }, { passive: false });
+            botoes.forEach((botao, index) => {
+                botao.disabled = true;
+                if (index === dados.correta) {
+                    botao.classList.add('correta');
+                } else if (index === indiceEscolhido) {
+                    botao.classList.add('errada');
+                }
+            });
 
-        // mobile: rede de segurança - se por algum motivo o toque "acertar"
-        // mesmo assim (ex: toque muito rápido), também foge no click
-        botaoNao.addEventListener('click', function (e) {
-            e.preventDefault();
-            moverBotaoNao();
-        });
+            if (indiceEscolhido === dados.correta) {
+                acertos++;
+            } else {
+                erros++;
+            }
 
-        // recalcula limites se a tela girar ou for redimensionada
-        window.addEventListener('resize', function () {
-            if (botaoNao.style.position === 'fixed' && botaoNao.style.left) {
-                moverBotaoNao();
+            botaoProxima.style.display = 'block';
+            barraProgressoInterna.style.width = `${((perguntaAtual + 1) / perguntas.length) * 100}%`;
+        }
+
+        function mostrarResultado() {
+            telaQuiz.style.display = 'none';
+            telaResultado.style.display = 'block';
+
+            document.getElementById('numero-acertos').textContent = acertos;
+            document.getElementById('numero-erros').textContent = erros;
+
+            const emojiResultado = document.getElementById('emoji-resultado');
+            const subtextoResultado = document.getElementById('subtexto-resultado');
+
+            if (acertos === perguntas.length) {
+                emojiResultado.textContent = '';
+                subtextoResultado.textContent = 'Boooooa leid ta sabendo.';
+            } else if (acertos >= perguntas.length / 2) {
+                emojiResultado.textContent = '';
+                subtextoResultado.textContent = 'Até que sabe, mas to de zoi';
+            } else {
+                emojiResultado.textContent = '';
+                subtextoResultado.textContent = 'sei não em leid acho que n ta sabendo de nada';
+            }
+        }
+
+        botaoProxima.addEventListener('click', () => {
+            perguntaAtual++;
+            if (perguntaAtual < perguntas.length) {
+                carregarPergunta();
+            } else {
+                mostrarResultado();
             }
         });
 
-        botaoSim.addEventListener('click', function () {
-            mensagem.style.display = 'block';
-            document.querySelector('h1').textContent = 'Combinado! 🎉';
-            document.querySelector('.botoes').style.display = 'none';
+        document.getElementById('botao-reiniciar').addEventListener('click', () => {
+            perguntaAtual = 0;
+            acertos = 0;
+            erros = 0;
+            telaResultado.style.display = 'none';
+            telaQuiz.style.display = 'block';
+            carregarPergunta();
         });
+
+        carregarPergunta();
     </script>
 </body>
 </html>
